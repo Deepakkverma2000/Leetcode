@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        unordered_map<int,int>m;
+        int p=trust.size();
+           vector<int> out(n+1,0);
+
+        
+        for(int i=1;i<=p;i++)
+        {
+          int x=trust[i-1][0];
+            int y=trust[i-1][1];
+            m[x]++;
+            out[y]++;
+        }
+        for(int i=1;i<=n;i++)
+        {
+            if(out[i]==(n-1))
+            {
+                if(m[i]==0)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+};
