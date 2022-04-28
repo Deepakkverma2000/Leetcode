@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool isvalid(vector<vector<int>>&image,int sr,int sc,int x,int n,int m)
+    {
+       if(sr>=0 && sc>=0 && sr<n && sc<m && image[sr][sc]==x)
+           return true;
+        else
+            return false;
+    }
+    void fill(vector<vector<int>>&image,int sr,int sc,int newColor,int x,int n,int m)
+    {
+     image[sr][sc]=newColor;
+        if(isvalid(image,sr+1,sc,x,n,m))
+        {
+            fill(image,sr+1,sc,newColor,x,n,m);
+        }
+        if(isvalid(image,sr-1,sc,x,n,m))
+        {
+            fill(image,sr-1,sc,newColor,x,n,m);
+        }
+        if(isvalid(image,sr,sc+1,x,n,m))
+        {
+            fill(image,sr,sc+1,newColor,x,n,m);
+        }
+        if(isvalid(image,sr,sc-1,x,n,m) )
+        {
+            fill(image,sr,sc-1,newColor,x,n,m);
+        }
+        return;
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+       int n=image.size();
+        int m=image[0].size();
+        
+        int x=image[sr][sc];
+        if(x==newColor)
+            return image;
+        fill(image,sr,sc,newColor,x,n,m);
+        return image;
+    }
+};
