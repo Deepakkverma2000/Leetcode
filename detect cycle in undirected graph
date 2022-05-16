@@ -1,0 +1,34 @@
+int DFS(int s,vector<int>visited,vector<int>curvisited,vector<int> adj[],int back)
+  {
+     
+      visited[s]=true;
+      curvisited[s]=true;
+      for(auto x:adj[s])
+      {
+          if(visited[x]==false)
+          {
+             
+             if(DFS(x,visited,adj,s))
+             return true;
+          }
+          else{
+              if(x!=back)
+              return 1;
+          }
+      }
+      return 0;
+  }
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+    vector<int> visited(V+1,false),curvisited(V+1,false);
+    for(int i=0;i<V;i++)
+    {
+      if(visited[i]==false)
+      {
+          int x = DFS(i,visited,curvisited,adj,-1);
+          if(x)
+          return 1;
+      }
+    }
+    return 0;
+    }
